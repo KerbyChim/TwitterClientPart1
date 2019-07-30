@@ -24,8 +24,8 @@ import com.loopj.android.http.RequestParams;
 public class TwitterClient extends OAuthBaseClient {
 	public static final BaseApi REST_API_INSTANCE = TwitterApi.instance();
 	public static final String REST_URL = "https://api.twitter.com/1.1";
-	public static final String REST_CONSUMER_KEY = "xJ4zq3rggbFvZMp3Rn7P49Z6W";
-	public static final String REST_CONSUMER_SECRET = "xBSITwpovmrgvDwyVF1s3Og3QO13v7YiDMa0dHa0J4DTbNND5k";
+	public static final String REST_CONSUMER_KEY = "Nu9ksiLEIEQzmTxFK1hs8TmYc";
+	public static final String REST_CONSUMER_SECRET = "ohIZAlEg0BTEuB21BFjS7aJyfxIzblWxMlzr2Inumcx9sRmBaq";
 
 	// Landing page to indicate the OAuth flow worked in case Chrome for Android 25+ blocks navigation back to the app.
 	public static final String FALLBACK_URL = "https://codepath.github.io/android-rest-client-template/success.html";

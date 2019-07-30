@@ -1,5 +1,6 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,12 +25,22 @@ public class TimelineActivity extends AppCompatActivity {
     private  TweetsAdapter adapter;
     private List<Tweet>tweets;
 
+    private SwipeRefreshLayout swipeContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
         client = TwitterApp.getRestClient(this);
+
+        swipeContainer = findViewById(R.id.swipeContainer);
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
 
         //Find the recycler view
         rvTweets = findViewById(R.id.rvTweets);
@@ -40,6 +51,14 @@ public class TimelineActivity extends AppCompatActivity {
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
         rvTweets.setAdapter(adapter);
         populateHomeTimeline();
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("TwitterClient", "content is being refreshed");
+                populateHomeTimeline();
+            }
+        });
     }
 
     private void populateHomeTimeline() {
@@ -48,21 +67,24 @@ public class TimelineActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //Log.d("TwitterClient", response.toString());
                 //Iterate through the list of tweets
+                List<Tweet> tweetsToAdd = new ArrayList<>();
                 for (int  i = 0; i< response.length(); i++){
                     try {
+                        //Convert each JSON into a Tweet oject
                         JSONObject jsonTweetObject = response.getJSONObject(i);
                         Tweet tweet = Tweet.fromJson(jsonTweetObject);
                         //Add the tweet into our data source
-                        tweets.add(tweet);
-                        //Notify adapter
-                        adapter.notifyItemInserted(tweets.size() - 1);
+                        tweetsToAdd.add(tweet);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                //Convert each JSON into a Tweet oject
-
-
+                //clear the existing data
+                adapter.clear();
+                //show the data we just received
+                adapter.addTweets(tweetsToAdd);
+                //Now we call setRefreshing
+                swipeContainer.setRefreshing(false);
             }
 
             @Override

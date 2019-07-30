@@ -65,7 +65,7 @@ public class TimelineActivity extends AppCompatActivity {
         client.getHomeTimeline(new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                //Log.d("TwitterClient", response.toString());
+                Log.d("TwitterClient", response.toString());
                 //Iterate through the list of tweets
                 List<Tweet> tweetsToAdd = new ArrayList<>();
                 for (int  i = 0; i< response.length(); i++){

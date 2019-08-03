@@ -1,16 +1,27 @@
 <resources>
 
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#ff69d8ff</item>
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="colorControlNormal">#d32f2f</item>
+        <item name="colorControlActivated">#ff5722</item>
+        <item name="colorControlHighlight">#f44336</item>
+    </style>
+    <style name="counterText">
+        <item name="android:repeatCount">@android:integer/config_shortAnimTime</item>
+    </style>
+    <style name="counterOverride">
+        <item name="android:repeatCount">@android:integer/config_longAnimTime</item>
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+
 
 </resources>

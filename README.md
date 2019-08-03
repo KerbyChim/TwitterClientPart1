@@ -354,6 +354,10 @@ That's all you need to get started. From here, hook up your activities and their
 
 ### Extras
 
+### WALKTROUGH
+https://github.com/KerbyChim/TwitterClientPart1/blob/master/walkthrough.gif
+https://github.com/KerbyChim/TwitterClientPart1/blob/master/walkthroughsupport.png
+
 #### Loading Images with Glide
 
 If you want to load a remote image url into a particular ImageView, you can use Glide to do that with:
